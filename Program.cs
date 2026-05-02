@@ -30,7 +30,8 @@ app.MapPost("/events", async (EventDto dto, IEventQueue queue) =>
 
 app.MapGet("/events", async (EventRepository repo) =>
 {
-    await repo.GetAllAsync();
+    var events = await repo.GetAllAsync();
+    return Results.Ok(events);
 });
 
 app.MapGet("/health", () => Results.Ok("ok"));
