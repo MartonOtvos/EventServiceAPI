@@ -1,7 +1,7 @@
 # Event Service API (.NET + PostgreSQL)
+[![CI](https://github.com/MartonOtvos/EventServiceAPI/actions/workflows/ci.yml/badge.svg)](...)
 
 A minimal event ingestion and retrieval service built with ASP.NET Core and PostgreSQL.
-
 
 ---
 
@@ -94,6 +94,30 @@ Response
 GET /health
 ```
 
+## Running Tests
+
+The project includes minimal integration tests for the POST endpoint using xUnit
+
+Run tests locally:
+
+```bash
+dotnet test
+```
+
+## Testing approach
+
+The tests are designed to validate API behaviour rather than internal implementation
+
+- Uses in-memory fallback instead of DB connection
+- Focuses on request/response validation
+- Avoids external dependencies for fast and reliable execution
+
+---
+
+## Continuous Integration
+
+A GitHub Actions workflow is configured to automatically build and test the project on every push and pull request
+
 ---
 
 ## Database
@@ -142,6 +166,7 @@ The project is organized into layers separating API, services, background proces
 - Write unit tests
 
 ---
+
 
 ## Author
 Marton Almos Otvos
