@@ -4,15 +4,27 @@ using System.Data;
 public class EventRepository
 {
     private readonly string _connectionString;
+    private List<EventDto> _fallbackList;
 
     public EventRepository(IConfiguration config)
     {
-        _connectionString = config.
-            GetConnectionString("Default") ?? throw new Exception("Missing connection string");
+        _connectionString = config.GetConnectionString("Default") ?? "";
+        _fallbackList = new List<EventDto>();
+
+        if (string.IsNullOrEmpty(_connectionString))
+        {
+            Console.WriteLine("!!! NO CONNECTION STRING: USING IN MEMORY LIST");
+        }
     }
 
     public async Task SaveAsync(EventDto evt)
     {
+        if (string.IsNullOrEmpty(_connectionString))
+        {
+            _fallbackList.Add(evt);
+            return;
+        }
+
         await using var conn = new NpgsqlConnection(_connectionString);
         await conn.OpenAsync();
 
@@ -29,6 +41,11 @@ public class EventRepository
 
     public async Task<List<EventDto>> GetAllAsync()
     {
+        if (string.IsNullOrEmpty(_connectionString))
+        {
+            return _fallbackList;
+        }
+
         var result = new List<EventDto>();
 
         await using var conn = new NpgsqlConnection(_connectionString);

@@ -5,7 +5,7 @@ using Xunit;
 
 public class EventTests
 {
-    private readonly HttpClient _Client;
+    private readonly HttpClient _client;
 
     public EventTests()
     {

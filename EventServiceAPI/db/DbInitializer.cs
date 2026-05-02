@@ -7,12 +7,14 @@ public class DbInitializer
 
     public DbInitializer(IConfiguration config)
     {
-        _connectionString = config
-            .GetConnectionString("Default") ?? throw new Exception("Missing connection string");
+        _connectionString = config.GetConnectionString("Default") ?? "";
     }
 
     public async Task InitializeAsync()
     {
+        if (string.IsNullOrEmpty(_connectionString))
+            return;
+        
         await using var conn = new NpgsqlConnection(_connectionString);
         await conn.OpenAsync();
 
