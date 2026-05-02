@@ -108,6 +108,23 @@ Response
 
 ## Project Structure
 
+The project is organized into layers separating API, services, background processing, and data access.
+
+.
+├── Program.cs                # Application entry point and endpoint definitions
+├── Services/
+│   ├── EventRepository.cs    # Data access layer (PostgreSQL via Npgsql)
+│   ├── EventQueue.cs         # In-memory asynchronous event queue implementation
+│   └── IEventQueue.cs        # Event queue interface
+├── Workers/
+│   └── EventWorker.cs        # Background worker for async event processing
+├── Models/
+│   └── Event.cs              # Event data model / DTO
+├── db/
+|   ├── DbInitializer.cs      # Initializes database schema on startup
+│   └── events.sql            # SQL schema definition
+├── Dockerfile                # Multi-stage build for containerized app
+├── docker-compose.yml        # Runs API + PostgreSQL together
 
 ## Future Improvements
 
