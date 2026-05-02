@@ -13,7 +13,7 @@
     <PackageReference Include="Npgsql" Version="10.0.2" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="10.1.7" />
 
-    <None Include="schema/events.sql">
+    <None Include="db/events.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
