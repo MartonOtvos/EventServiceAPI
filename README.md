@@ -88,6 +88,12 @@ Response
 ]
 ```
 
+#### Health check
+
+```bash
+GET /health
+```
+
 ---
 
 ## Database
@@ -100,8 +106,9 @@ Response
 ## Design Notes
 
 - Uses async/await for non-blocking IO
-- Manual SQL with Npgsql for simplicity and control
-- Background worker simulates event processing pipeline
+- In-memory queue used instead of external software for simplicity
+- Manual SQL chosen over ORM for simplicity and control
+- Background worker simulates async event processing pipeline
 - Clean separation between API, repository, and worker logic
 
 ---
